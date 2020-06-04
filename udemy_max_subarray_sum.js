@@ -15,8 +15,32 @@ maxSubarraySum([1,4,2,10,23,3,1,0,20], 4); // 39
 maxSubarraySum([-3,4,0,-2,6,-1], 2); // 5
 maxSubarraySum([3,-2,7,-4,1,-1,4,-2,1], 2); // 5
 maxSubarraySum([2,3], 3); // null;
+
+Constraint:
+Time complexity: O(N)
 */
 
 const maxSubarraySum = (arr, num) => {
-  
+  if(num > arr.length) {
+    return null;
+  }
+  let max = 0;
+  let current = 0;
+  let p1 = 0;
+  let p2 = num;
+  for(let i = 0; i < num; i++) {
+    max += arr[i];
+    current = max;
+  }
+  while(p2 < arr.length + 1) {
+    current = current - arr[p1];
+    current = current + arr[p2];
+    if(current > max) {
+      max = current;
+    }
+    p1++;
+    p2++;
+  }
+
+  return max;
 }
